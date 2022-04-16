@@ -72,28 +72,28 @@ crypto_df = crypto_df[crypto_df.TotalCoinsMined > 0]
 crypto_df.head(10)
 
 
-# In[12]:
+# In[10]:
 
 
 # Create a new DataFrame that holds only the cryptocurrencies names.
-clean_crypto = crypto_df['CoinName']
+clean_crypto = crypto_df[['CoinName']].copy()
 clean_crypto
 
 
-# In[13]:
+# In[11]:
 
 
 # Drop the 'CoinName' column since it's not going to be used on the clustering algorithm.
 crypto_df = crypto_df.drop(columns=['CoinName'])
 
 
-# In[14]:
+# In[12]:
 
 
 crypto_df.head(10)
 
 
-# In[15]:
+# In[13]:
 
 
 # Use get_dummies() to create variables for text features.
@@ -102,7 +102,7 @@ X = pd.get_dummies(X)
 X.head(10)
 
 
-# In[17]:
+# In[14]:
 
 
 # Standardize the data with StandardScaler().
@@ -112,18 +112,18 @@ print(scaled_crypto[0:5])
 
 # ### Deliverable 2: Reducing Data Dimensions Using PCA
 
-# In[ ]:
+# In[15]:
 
 
 # Using PCA to reduce dimension to three principal components.
-# YOUR CODE HERE
+pca = PCA(n_components=3)
 
 
-# In[ ]:
+# In[16]:
 
 
 # Create a DataFrame with the three principal components.
-# YOUR CODE HERE
+crypto_pca = pca.fit_transform(scaled_crypto)
 
 
 # ### Deliverable 3: Clustering Crytocurrencies Using K-Means
